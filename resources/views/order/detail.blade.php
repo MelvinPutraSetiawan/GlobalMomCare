@@ -38,7 +38,7 @@
                     <div class="flex items-center gap-6">
                         <a href="{{ route('products.show', $order->product->id) }}" class="h-14 w-14 shrink-0">
                             @if($order->product->pictures->isNotEmpty())
-                                <img src="{{ asset('storage/' . $order->product->pictures->first()->pictureLink) }}" alt="{{ $order->product->name }}" class="w-14 h-14 object-cover rounded">
+                                <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $order->product->name }}" class="w-14 h-14 object-cover rounded">
                             @else
                                 <div class="bg-gray-200 w-14 h-14 flex items-center justify-center rounded">
                                     <span class="text-gray-500">No Image</span>

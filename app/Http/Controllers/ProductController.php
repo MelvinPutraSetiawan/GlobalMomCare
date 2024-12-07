@@ -35,7 +35,7 @@ class ProductController extends Controller
             'description' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
         $products = Product::create([
             'account_id' => Auth::id(),
@@ -52,10 +52,12 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $products->pictures()->attach($picture->id);
             }
         }
@@ -89,7 +91,7 @@ class ProductController extends Controller
             'description' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
         $product->update($validated);
 
@@ -98,10 +100,12 @@ class ProductController extends Controller
         // Handle new images if provided
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $product->pictures()->attach($picture->id);
             }
         }

@@ -18,7 +18,7 @@
                     @if($forum->pictures->isNotEmpty())
                         @foreach ($forum->pictures as $index => $picture)
                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/' . $picture->pictureLink) }}" alt="{{ $forum->title }}" class="d-block w-100 object-cover rounded-lg shadow-md">
+                                <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $forum->title }}" class="d-block w-100 object-cover rounded-lg shadow-md">
                             </div>
                         @endforeach
                     @else

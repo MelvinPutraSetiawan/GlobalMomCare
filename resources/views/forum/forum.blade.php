@@ -13,7 +13,7 @@
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search articles by title..." class="w-full pl-10 pr-10 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search forums by title..." class="w-full pl-10 pr-10 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
                 <div class="ml-8">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
@@ -73,7 +73,7 @@
                     <div class="bg-gray-50 shadow-md rounded-lg mb-6 p-4 flex flex-col md:flex-row items-start md:items-center hover:bg-gray-200">
                         <div class="w-full md:w-1/6">
                             @if($forum->pictures->isNotEmpty())
-                                <img src="{{ asset('storage/' . $forum->pictures->first()->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
+                                <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
                             @else
                                 <div class="bg-gray-200 w-full h-32 flex items-center justify-center rounded">
                                     <span class="text-gray-500">No Image</span>

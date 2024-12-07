@@ -32,7 +32,7 @@ class ForumController extends Controller
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
 
         $forums = Forum::create([
@@ -48,10 +48,12 @@ class ForumController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $forums->pictures()->attach($picture->id);
             }
         }
@@ -104,7 +106,7 @@ class ForumController extends Controller
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
         $forum->update($validated);
 
@@ -113,10 +115,12 @@ class ForumController extends Controller
         // Handle new images if provided
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $forum->pictures()->attach($picture->id);
             }
         }

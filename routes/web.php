@@ -7,13 +7,23 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\PregnancyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ScheduleController;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Route;
 
 // =============================
 // INI ROUTING UNTUK SEMUA ORANG
 // =============================
+
+// Routing Pregnancy Calendars.
+
+Route::get('/pregnancy-calendar', function() { 
+    return view('pregnancy-calendar'); 
+})->name('pregnancy.calendar');
+
+Route::post('/pregnancy-calendar', [PregnancyController::class, 'calculatePregnancy'])->name('pregnancy.calculate');
 
 // ==================
 // HOME ROUTING
@@ -156,6 +166,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/order/process/deliver/{id}', [OrderDetailController::class, 'processDeliver'])->name('orders.process.deliver');
     // ADMIN COMPLETED ORDER
     Route::post('/order/complete/{id}', [OrderDetailController::class, 'completed'])->name('orders.completed');
+
+    // ==================
+    // APPOINTMENTS ROUTING
+    // ==================
+
+    Route::get('/appointments', [ScheduleController::class, 'index'])->name('view.appointments');
+    Route::post('/appointments', [ScheduleController::class, 'addAppointments'])->name('add.appointments');
+    Route::delete('/appointments/{id}', [ScheduleController::class, 'deleteAppointments'])->name('delete.appointments');
 
 });
 

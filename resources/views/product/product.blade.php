@@ -15,7 +15,7 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search articles by title..." class="w-full pl-10 pr-10 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="w-full pl-10 pr-10 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500">
                         </div>
                         <div class="ml-8">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
@@ -76,7 +76,7 @@
                 @foreach ($products as $product)
                     <div class="flex flex-col justify-center items-center mt-0 bg-gray-50 pb-4 rounded-lg hover:bg-gray-200">
                         <a href="{{ route('products.show', $product->id) }}" class="no-underline p-4 rounded-lg">
-                            <img src="{{ asset('storage/' . $product->pictures->first()->pictureLink) }}" alt="{{ $product->name }}" class="w-64 h-64 object-cover rounded-lg">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $product->name }}" class="w-64 h-64 object-cover rounded-lg">
                             <h3 class="mt-4 text-base text-gray-700">{{ $product->name }}</h3>
                             <p class="mt-1 text-base font-bold text-gray-900 mb-2">Rp. {{ $product->price }}</p>
                             @foreach ($product->categories as $category)

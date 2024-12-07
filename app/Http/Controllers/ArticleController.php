@@ -58,7 +58,7 @@ class ArticleController extends Controller
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
 
         $article = Article::create([
@@ -74,10 +74,12 @@ class ArticleController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $article->pictures()->attach($picture->id);
             }
         }
@@ -104,7 +106,7 @@ class ArticleController extends Controller
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:1500'
         ]);
         $article->update($validated);
 
@@ -113,10 +115,12 @@ class ArticleController extends Controller
         // Handle new images if provided
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $imageData = file_get_contents($image->getRealPath());
+
                 $picture = Picture::create([
-                    'pictureLink' => $path,
+                    'pictureLink' => $imageData,
                 ]);
+
                 $article->pictures()->attach($picture->id);
             }
         }

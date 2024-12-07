@@ -70,7 +70,9 @@
         @forelse($articles as $article)
         <div class="card bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
             @if ($article->pictures->isNotEmpty())
-                <img src="{{ asset('storage/' . $article->pictures->first()->pictureLink) }}" alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                <img src="data:image/jpeg;base64,{{ base64_encode($article->pictures->first()->pictureLink) }}"
+                alt="{{ $article->title }}"
+                class="w-full h-48 object-cover">
             @else
                 <img src="{{ asset('images/default.jpg') }}" alt="{{ $article->title }}" class="w-full h-48 object-cover">
             @endif

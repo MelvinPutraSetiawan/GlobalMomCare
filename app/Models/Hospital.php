@@ -10,7 +10,7 @@ class Hospital extends Model
     /** @use HasFactory<\Database\Factories\HospitalFactory> */
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'address'];
 
     public function schedules()
     {

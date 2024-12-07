@@ -31,7 +31,7 @@
                                 @if($product->pictures->isNotEmpty())
                                     @foreach ($product->pictures as $index => $picture)
                                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $picture->pictureLink) }}" alt="{{ $product->title }}" class="d-block w-100 object-cover rounded-lg shadow-md">
+                                            <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $product->title }}" class="d-block w-100 object-cover rounded-lg shadow-md">
                                         </div>
                                     @endforeach
                                 @else

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->string('pictureLink');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE pictures ADD pictureLink MEDIUMBLOB");
     }
 
     /**

@@ -24,10 +24,6 @@ class OrderDetailController extends Controller
     public function store(Request $request){
         $accountOrderDetail = AccountOrderDetail::create([
             'status' => 'Waiting Payment',
-            'processing' => now()->addDays(1),
-            'deliver' => now()->addDays(1),
-            'arrive' => now()->addDays(2),
-            'payment' => now(),
             'account_id' => Auth::id(),
         ]);
 

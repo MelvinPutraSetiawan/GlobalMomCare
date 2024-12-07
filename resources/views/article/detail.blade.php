@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach($article->pictures as $picture)
             <div class="mb-4">
-                <img src="{{ Storage::url($picture->pictureLink) }}" alt="Article Image" class="w-full h-auto rounded-lg shadow-md">
+                <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="Article Image" class="w-full h-auto rounded-lg shadow-md">
             </div>
         @endforeach
     </div>
