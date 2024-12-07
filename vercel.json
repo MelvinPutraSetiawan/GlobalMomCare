@@ -1,16 +1,15 @@
 {
     "version": 2,
-    "framework": null,
-    "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.0" }
-    },
+    "builds": [
+        {
+            "src": "Dockerfile",
+            "use": "@vercel/docker"
+        }
+    ],
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/$1" },
         { "src": "/", "dest": "/api/index.php" }
     ],
-    "public": true,
-    "buildCommand": "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev --prefer-dist && vite build",
-    "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
