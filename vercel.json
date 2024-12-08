@@ -6,7 +6,7 @@
             "use": "@vercel/docker"
         }
     ],
-    "routes": [{ "src": "/(.*)", "dest": "/api/index.php" }],
+    "routes": [{ "src": "/(.*)", "dest": "/public/index.php" }],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
@@ -15,8 +15,6 @@
         "DB_HOST": "globalmomscare-globalmomscare.i.aivencloud.com",
         "DB_PORT": "24685",
         "DB_DATABASE": "globalmomscare",
-        "DB_USERNAME": "tmp",
-        "DB_PASSWORD": "temp",
         "LOG_CHANNEL": "stderr",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
