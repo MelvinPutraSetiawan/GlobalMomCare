@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\Melvin\Documents\GitHub\GlobalMomsCare\resources\views\test.blade.php ENDPATH**/ ?>
