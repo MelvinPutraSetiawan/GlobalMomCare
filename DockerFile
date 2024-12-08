@@ -10,8 +10,11 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    curl \
-    libssl-dev  # Install the correct OpenSSL library
+    curl
+
+
+# Install the required version of libssl
+RUN apt-get update && apt-get install -y libssl1.0-dev
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql zip gd mbstring
@@ -30,8 +33,8 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 80 for HTTP
+# Expose ports
 EXPOSE 80
 
-# Start PHP-FPM (No Nginx needed in this setup)
-CMD ["php-fpm"]
+# Start Nginx and PHP-FPM
+CMD service nginx start && php-fpm
