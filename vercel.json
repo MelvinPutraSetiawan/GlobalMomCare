@@ -6,7 +6,7 @@
             "use": "@vercel/docker"
         }
     ],
-    "routes": [{ "src": "/(.*)", "dest": "/" }],
+    "routes": [{ "src": "/(.*)", "dest": "/api/index.php" }],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
