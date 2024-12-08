@@ -46,7 +46,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark fw-semibold mr-3" href="#">About Us</a>
                 </li>
-                <!-- Check if user logged? -->
+                <!-- Check if user logged?? -->
                 @if (Auth::check())
                     <!-- User Logged,  Show Profile -->
                     <li class="nav-item dropdown">
