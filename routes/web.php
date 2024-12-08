@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // Routing Pregnancy Calendars.
 
-Route::get('/pregnancy-calendar', function() {
-    return view('pregnancy-calendar');
+Route::get('/pregnancy-calendar', function() { 
+    return view('pregnancy-calendar'); 
 })->name('pregnancy.calendar');
 
 Route::post('/pregnancy-calendar', [PregnancyController::class, 'calculatePregnancy'])->name('pregnancy.calculate');

@@ -9,7 +9,7 @@ class PregnancyController extends Controller
 {
     // Calculate Pregnancy details based on last period date.
     public function calculatePregnancy(Request $request) {
-
+        
         $request->validate([
             'last_period' => 'required|date',
         ]);
