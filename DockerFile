@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    curl
+    curl \
+    libssl1.0-dev  # Add the missing libssl dependency
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql zip gd mbstring
@@ -25,12 +26,12 @@ COPY . .
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Change ownership of the Laravel directory
+# Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port
+# Expose ports
 EXPOSE 80
 
-# Start the PHP server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+# Start Nginx and PHP-FPM
+CMD service nginx start && php-fpm
