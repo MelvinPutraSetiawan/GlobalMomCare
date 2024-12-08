@@ -1,33 +1,36 @@
-# Use a PHP base image with Apache
-FROM php:8.1-apache
+# Use the official PHP image with FPM
+FROM php:8.1-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    curl
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql zip gd mbstring
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    libonig-dev \
-    libzip-dev \
-    unzip \
-    curl \
-    && docker-php-ext-install pdo_mysql zip mbstring
-
-# Enable Apache rewrite module
-RUN a2enmod rewrite
+# Copy application files
+COPY . .
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --optimize-autoloader
 
-# Copy project files to the container
-COPY . .
-
-# Set proper permissions for Laravel
+# Change ownership of the Laravel directory
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage \
-    && chmod -R 775 /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 80
+# Expose port
 EXPOSE 80
 
-# Start Apache server
-CMD ["apache2-foreground"]
+# Start the PHP server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]

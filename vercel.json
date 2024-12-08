@@ -2,25 +2,25 @@
     "version": 2,
     "builds": [
         {
-            "src": "api/index.php",
-            "use": "@bow/php-vercel"
+            "src": "Dockerfile",
+            "use": "@vercel/docker"
         }
     ],
-    "routes": [{ "src": "/(.*)", "dest": "/api/index.php" }],
+    "routes": [{ "src": "/(.*)", "dest": "/" }],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://global-moms-care.vercel.app",
-        "APP_KEY": "base64:9jINEkBC8u/KED39Pt7FGtrkSPQV40755wPSzFnLK+U=",
-        "LOG_CHANNEL": "stderr",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "mysql",
         "DB_HOST": "globalmomscare-globalmomscare.i.aivencloud.com",
         "DB_PORT": "24685",
         "DB_DATABASE": "globalmomscare",
         "DB_USERNAME": "tmp",
-        "DB_PASSWORD": "temp"
+        "DB_PASSWORD": "temp",
+        "LOG_CHANNEL": "stderr",
+        "CACHE_DRIVER": "array",
+        "SESSION_DRIVER": "cookie",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "APP_KEY": "base64:9jINEkBC8u/KED39Pt7FGtrkSPQV40755wPSzFnLK+U="
     }
 }
