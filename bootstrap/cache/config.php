@@ -7,7 +7,7 @@
   array (
     'name' => 'Laravel',
     'env' => 'production',
-    'debug' => false,
+    'debug' => true,
     'url' => 'https://global-moms-care.vercel.app',
     'frontend_url' => 'http://localhost:3000',
     'asset_url' => NULL,
