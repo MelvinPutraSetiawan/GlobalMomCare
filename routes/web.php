@@ -12,8 +12,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScheduleController;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-
 
 // =============================
 // INI ROUTING UNTUK SEMUA ORANG
@@ -34,15 +32,7 @@ Route::post('/pregnancy-calendar', [PregnancyController::class, 'calculatePregna
 Route::get('/', function () {
     return redirect()->route('home');
 });
-// Route::get('/home', [ArticleController::class, 'getArticles'])->name('home');
-Route::get('/home', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Database connected successfully!';
-    } catch (\Exception $e) {
-        return 'Could not connect to the database. Please check your credentials.';
-    }
-});
+Route::get('/home', [ArticleController::class, 'getArticles'])->name('home');
 // Routing Search Bar + Kategory Di Home
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 // Routing Buat Read More [Detail Articles]
