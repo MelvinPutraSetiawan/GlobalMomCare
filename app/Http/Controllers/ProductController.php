@@ -14,9 +14,9 @@ class ProductController extends Controller
     //
     public function index(){
         if(Auth::check() &&  Auth::user()->role=="admin"){
-            $products = Product::all();
+            $products = Product::with(['categories', 'pictures'])->get();
         }else{
-            $products = Product::where('stock', '>', 0)->get();
+            $products = Product::with(['categories', 'pictures'])->where('stock', '>', 0)->get();
         }
         $categories = Category::all();
         return view('product.product', compact('products', 'categories'));
@@ -66,7 +66,7 @@ class ProductController extends Controller
     }
 
     public function show($id){
-        $product = Product::findOrFail($id);
+        $product = Product::with(['categories', 'pictures', 'account'])->findOrFail($id);
         return view('product.detail', compact('product'));
     }
 
@@ -77,13 +77,13 @@ class ProductController extends Controller
     }
 
     public function updatePage($id){
-        $product = Product::findOrFail($id);
+        $product = Product::with(['categories', 'pictures', 'account'])->findOrFail($id);
         $categories = Category::all();
         return view('product.update', compact('product', 'categories'));
     }
 
     public function update(Request $request, $id){
-        $product = Product::findOrFail($id);
+        $product = Product::with(['categories', 'pictures', 'account'])->findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required',
@@ -118,7 +118,8 @@ class ProductController extends Controller
         $categories = $request->input('categories');
 
         if(Auth::user()->role == "admin"){
-            $products = Product::when($search, function ($query, $search) {
+            $products = Product::with(['categories', 'pictures', 'account'])
+            ->when($search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
             })
             ->when($categories, function ($query, $categories) {
@@ -128,7 +129,8 @@ class ProductController extends Controller
             })
             ->get();
         }else{
-            $products = Product::when($search, function ($query, $search) {
+            $products = Product::with(['categories', 'pictures', 'account'])->
+            when($search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
             })
             ->where('stock', '>', 0)

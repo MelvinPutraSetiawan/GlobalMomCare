@@ -12,7 +12,7 @@ class ForumController extends Controller
 {
     //
     public function index(){
-        $forums = Forum::all();
+        $forums = Forum::with(['categories', 'pictures'])->get();
         $categories = Category::all();
         return view('forum.forum', compact('forums', 'categories'));
     }
@@ -66,7 +66,8 @@ class ForumController extends Controller
         $search = $request->input('search');
         $categories = $request->input('categories');
 
-        $forums = Forum::when($search, function ($query, $search) {
+        $forums = Forum::with(['categories', 'pictures'])
+        ->when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%');
         })
         ->when($categories, function ($query, $categories) {
@@ -83,7 +84,7 @@ class ForumController extends Controller
     }
 
     public function show($id){
-        $forum = Forum::with(['comments', 'pictures', 'account'])->findOrFail($id);
+        $forum = Forum::with(['comments.account', 'pictures', 'account'])->findOrFail($id);
         return view('forum.detail', compact('forum'));
     }
 
@@ -94,13 +95,13 @@ class ForumController extends Controller
     }
 
     public function updatePage($id){
-        $forum = Forum::findOrFail($id);
+        $forum = Forum::with(['categories', 'pictures'])->findOrFail($id);
         $categories = Category::all();
         return view('forum.update', compact('forum', 'categories'));
     }
 
     public function update(Request $request, $id){
-        $forum = Forum::findOrFail($id);
+        $forum = Forum::with(['categories', 'pictures'])->findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',

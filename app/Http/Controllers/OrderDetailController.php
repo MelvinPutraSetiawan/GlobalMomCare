@@ -14,9 +14,9 @@ class OrderDetailController extends Controller
 {
     public function index(){
         if (Auth::user()->role == "admin") {
-            $orders = AccountOrderDetail::with('orderDetails')->paginate(10);
+            $orders = AccountOrderDetail::with('orderDetails.product')->paginate(10);
         } else {
-            $orders = AccountOrderDetail::with('orderDetails')->where('account_id', '=', Auth::id())->paginate(10);
+            $orders = AccountOrderDetail::with('orderDetails.product')->where('account_id', '=', Auth::id())->paginate(10);
         }
         return view('order.order', compact('orders'));
     }
@@ -41,7 +41,7 @@ class OrderDetailController extends Controller
     }
 
     public function payment($id){
-        $orders = AccountOrderDetail::findOrFail($id);
+        $orders = AccountOrderDetail::with(['orderDetails.product.pictures'])->findOrFail($id);
         $user = Auth::user();
         if($orders->status == "Waiting Payment")
             return view('order.payment', compact('orders', 'user'));
@@ -86,7 +86,7 @@ class OrderDetailController extends Controller
     }
 
     public function track($id){
-        $orders = AccountOrderDetail::findOrFail($id);
+        $orders = AccountOrderDetail::with(['orderDetails.product.pictures'])->findOrFail($id);
         return view('order.detail', compact('orders'));
     }
 
