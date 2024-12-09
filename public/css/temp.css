@@ -1,0 +1,101 @@
+/* @import "bootstrap/dist/css/bootstrap.min.css"; */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: #c82333 !important; /* Darker red on hover */
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c82333 !important; /* Darker red on hover */
+    background-color: #f8d7da !important; /* Light red background on hover */
+    border-radius: 5px;
+}
+
+/* Appointments Button */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important; /* Darker red on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .dropdown-toggle {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: #b71c1c; /* Darker red on hover */
+}
+
+.footer {
+    background-color: #b71c1c;
+    color: white;
+    text-align: center;
+    padding: 35px;
+    padding-top: 40px;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#content {
+    min-height: 315px;
+}
+
+.toggle-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toggle-section.active {
+    display: block;
+    opacity: 1;
+}
+
+.carousel-item {
+    height: 500px;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
