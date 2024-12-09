@@ -44,12 +44,12 @@
                             <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
                             <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Price:</dt>
                             @php
-                                $total = 10000;
+                                $total = 0;
                                 foreach ($order->orderDetails as $detail) {
                                     $total += $detail->product->price * $detail->quantity;
                                 }
-                                $tax = 0.1 * $subtotal;
-                                $total = $total+$tax;
+                                $tax = 0.1 * $total;
+                                $total = $total+$tax+10000;
                             @endphp
                             <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">Rp {{ number_format($total, 0, ',', '.') }}</dd>
                             </dl>
