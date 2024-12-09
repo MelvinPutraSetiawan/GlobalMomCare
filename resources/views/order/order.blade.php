@@ -48,6 +48,8 @@
                                 foreach ($order->orderDetails as $detail) {
                                     $total += $detail->product->price * $detail->quantity;
                                 }
+                                $tax = 0.1 * $subtotal;
+                                $total = $total+$tax;
                             @endphp
                             <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">Rp {{ number_format($total, 0, ',', '.') }}</dd>
                             </dl>
