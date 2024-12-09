@@ -76,7 +76,7 @@
                 @foreach ($products as $product)
                     <div class="flex flex-col justify-center items-center mt-0 bg-gray-50 pb-4 rounded-lg hover:bg-gray-200">
                         <a href="{{ route('products.show', $product->id) }}" class="no-underline p-4 rounded-lg">
-                            <img src="data:image/jpeg;base64,{{ base64_encode($product->picture->pictureLink) }}" alt="{{ $product->name }}" class="w-64 h-64 object-cover rounded-lg">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($product->pictures->first()->pictureLink) }}" alt="{{ $product->name }}" class="w-64 h-64 object-cover rounded-lg">
                             <h3 class="mt-4 text-base text-gray-700">{{ $product->name }}</h3>
                             <p class="mt-1 text-base font-bold text-gray-900 mb-2">Rp. {{ $product->price }}</p>
                             @foreach ($product->categories as $category)

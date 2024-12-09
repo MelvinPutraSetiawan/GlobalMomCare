@@ -18,7 +18,7 @@
                         <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <a href="{{ route('products.show', $cart->product->id) }}" class="shrink-0 md:order-1">
                             @if($cart->product->pictures->isNotEmpty())
-                                <img src="data:image/jpeg;base64,{{ base64_encode($cart->product->picture->pictureLink) }}" alt="{{ $cart->product->name }}" class="w-40 h-32 object-cover rounded">
+                                <img src="data:image/jpeg;base64,{{ base64_encode($cart->product->pictures->first()->pictureLink) }}" alt="{{ $cart->product->name }}" class="w-40 h-32 object-cover rounded">
                             @else
                                 <div class="bg-gray-200 w-full h-32 flex items-center justify-center rounded">
                                     <span class="text-gray-500">No Image</span>
