@@ -74,9 +74,9 @@ class AccountController extends Controller
     public function profile(){
         $id = Auth::id();
         $user = Auth::user();
-        $articles = Article::where('account_id', '=', $id)->get();
-        $forums = Forum::where('account_id', '=', $id)->get();
-        $comments = Comment::where('account_id', '=', $id)->get();
+        $articles = Article::where('account_id', '=', $id)->with(['categories', 'pictures'])->get();
+        $forums = Forum::where('account_id', '=', $id)->with(['comments', 'categories', 'pictures'])->get();
+        $comments = Comment::where('account_id', '=', $id)->with(['forum', 'account'])->get();
         return view('profile', compact('user', 'articles', 'forums', 'comments'));
     }
 }

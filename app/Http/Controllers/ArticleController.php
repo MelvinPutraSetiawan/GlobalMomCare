@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     public function getArticles() {
-        $articles = Article::all();
+        $articles = Article::with(['categories', 'pictures'])->get();
         $categories = Category::all();
 
         return view('home', compact('articles', 'categories'));
@@ -23,7 +23,8 @@ class ArticleController extends Controller
         $search = $request->input('search');
         $categories = $request->input('categories');
 
-        $articles = Article::when($search, function ($query, $search) {
+        $articles = Article::with(['categories', 'pictures'])
+        ->when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%');
         })
         ->when($categories, function ($query, $categories) {
@@ -47,7 +48,7 @@ class ArticleController extends Controller
     }
 
     public function show($id){
-        $article = Article::findOrFail($id);
+        $article = Article::with(['categories', 'pictures'])->findOrFail($id);
         return view('article.detail', compact('article'));
     }
 
@@ -94,13 +95,13 @@ class ArticleController extends Controller
     }
 
     public function updatePage($id){
-        $article = Article::findOrFail($id);
+        $article = Article::with(['categories', 'pictures'])->findOrFail($id);
         $categories = Category::all();
         return view('article.update', compact('article', 'categories'));
     }
 
     public function update(Request $request, $id){
-        $article = Article::findOrFail($id);
+        $article = Article::with(['categories', 'pictures'])->findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
