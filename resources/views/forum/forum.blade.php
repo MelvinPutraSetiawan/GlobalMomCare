@@ -73,7 +73,7 @@
                     <div class="bg-gray-50 shadow-md rounded-lg mb-6 p-4 flex flex-col md:flex-row items-start md:items-center hover:bg-gray-200">
                         <div class="w-full md:w-1/6">
                             @if($forum->pictures->isNotEmpty())
-                                <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
+                                <img src="data:image/jpeg;base64,{{ base64_encode($forum->picture->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
                             @else
                                 <div class="bg-gray-200 w-full h-32 flex items-center justify-center rounded">
                                     <span class="text-gray-500">No Image</span>

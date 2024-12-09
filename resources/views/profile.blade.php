@@ -51,7 +51,7 @@
 
                         @endphp
                         @if ($article->pictures->isNotEmpty())
-                            <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($article->pictures->pictureLink) }}" alt="{{ $article->title }}" class="w-full h-48 object-cover">
                         @else
                             <img src="{{ asset('images/default.jpg') }}" alt="{{ $article->title }}" class="w-full h-48 object-cover">
                         @endif
@@ -102,7 +102,7 @@
                 <div class="bg-gray-50 shadow-md rounded-lg mb-6 p-4 flex flex-col md:flex-row items-start md:items-center hover:bg-gray-200">
                     <div class="w-full md:w-1/6 flex-shrink-0">
                         @if($forum->pictures && $forum->pictures->isNotEmpty())
-                            <img src="data:image/jpeg;base64,{{ base64_encode($picture->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($forum->pictures->pictureLink) }}" alt="{{ $forum->title }}" class="w-48 h-32 object-cover rounded">
                         @else
                             <div class="bg-gray-200 w-48 h-32 flex items-center justify-center rounded">
                                 <span class="text-gray-500">No Image</span>
