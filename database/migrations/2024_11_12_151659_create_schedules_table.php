@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
-            $table->foreignId('hospital_id')->constrained('hospitals')->onDelete('cascade');
-            $table->date('date');
+            $table->foreignId('professional_id')->constrained('accounts')->onDelete('cascade');
+            $table->text('reason');
+            $table->text('status');
+            $table->dateTime('date');
             $table->timestamps();
         });
     }

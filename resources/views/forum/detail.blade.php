@@ -39,7 +39,12 @@
         @endif
 
 
-        <p class="text-gray-700 mb-6">{{ $forum->content }}</p>
+        <!-- Product Detail -->
+        <div class="prose prose-lg max-w-none text-gray-700 mb-8">
+            @foreach (explode("\n", $forum->content) as $paragraph)
+                <p>{{ $paragraph }}</p>
+            @endforeach
+        </div>
 
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Comments</h2>
 

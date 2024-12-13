@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark fw-semibold mr-3" href="/forums">Forums</a>
                 </li>
-                @if (auth()->check())
+                @if (auth()->check() && auth()->user()->role != "professional")
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-black bg-white fw-semibold mr-4 px-2 py-2 rounded" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Product
@@ -24,25 +24,31 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark mx-3" href="/products">Products</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark mx-3" href="{{ route('carts.index') }}">Cart</a>
-                            </li>
+                            @if (auth()->user()->role != "admin")
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark mx-3" href="{{ route('carts.index') }}">Cart</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link text-dark mx-3" href="{{ route('orders.index') }}">Orders</a>
                             </li>
                         </ul>
                     </li>
-                @else
+                @elseif(!auth()->check())
                     <li class="nav-item">
                         <a class="nav-link text-dark fw-semibold mr-3" href="/products">Products</a>
                     </li>
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold mr-3" href="{{ route('pregnancy.calendar') }}">Pregnancy Calendar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold mr-3" href="{{ route('view.appointments') }}">Appointments</a>
-                </li>
+                @if (!auth()->check() || (auth()->check() && auth()->user()->role == "user"))
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold mr-3" href="{{ route('pregnancy.calendar') }}">Pregnancy Calendar</a>
+                    </li>
+                @endif
+                @if (!auth()->check() || (auth()->check() && auth()->user()->role != "admin"))
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold mr-3" href="{{ route('view.appointments') }}">Appointments</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link text-dark fw-semibold mr-3" href="#">About Us</a>
                 </li>

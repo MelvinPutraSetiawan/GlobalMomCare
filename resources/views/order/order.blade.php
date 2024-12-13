@@ -7,7 +7,11 @@
   <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
     <div class="mx-auto max-w-5xl">
       <div class="gap-4 sm:flex sm:items-center sm:justify-between">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">My orders</h2>
+        @if (auth()->user()->role != "admin");
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">My orders</h2>
+        @else
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">All Orders</h2>
+        @endif
 
         <div class="mt-6 gap-4 space-y-4 sm:mt-0 sm:flex sm:items-center sm:justify-end sm:space-y-0">
           <div>
@@ -44,12 +48,10 @@
                             <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
                             <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Price:</dt>
                             @php
-                                $total = 0;
+                                $total = 10000;
                                 foreach ($order->orderDetails as $detail) {
                                     $total += $detail->product->price * $detail->quantity;
                                 }
-                                $tax = 0.1 * $total;
-                                $total = $total+$tax+10000;
                             @endphp
                             <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">Rp {{ number_format($total, 0, ',', '.') }}</dd>
                             </dl>

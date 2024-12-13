@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Hospital;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -11,32 +12,32 @@ class ScheduleController extends Controller
 {
     // Show appointments page with all the appointments.
     public function index() {
-        $schedules = Schedule::where('account_id', Auth::id())->with('hospital')->orderBy('date')->get();
+        $account = Account::where('id', Auth::id())->first();
 
-        return view('appointments', compact('schedules'));
+        if ($account->role == "professional") {
+            $schedules = Schedule::where('professional_id', Auth::id())->with('account', 'professional')->orderBy('date')->get();
+            $professionals = Account::where('role', 'professional')->get();
+            return view('appointments.index', compact('schedules', 'account', 'professionals'));
+        }
+
+        $schedules = Schedule::where('account_id', Auth::id())->with('account', 'professional')->orderByRaw("FIELD(status, 'Accepted', 'Pending', 'Denied')")->orderBy('date')->get();
+        $professionals = Account::where('role', 'professional')->get();
+        return view('appointments.index', compact('schedules', 'account', 'professionals'));
     }
 
     // Add new Appointments.
     public function addAppointments(Request $request) {
         $request->validate([
-            'hospital_name' => 'required|string|max:255',
-            'hospital_address' => 'required',
-            'appointment_date' => 'required|date',
+            'doctor' => 'required|string|max:255',
+            'reason' => 'required|string|max:255',
+            'appointment_date' => 'required|date|after:now',
         ]);
-
-        $hospital = Hospital::where('name', $request->hospital_name)
-                        ->where('address', $request->hospital_address)->first();
-
-        if (!$hospital) {
-            $hospital = Hospital::create([
-                'name' => $request->hospital_name,
-                'address' => $request->hospital_address,
-            ]);
-        }
 
         Schedule::create([
             'account_id' => Auth::id(),
-            'hospital_id' => $hospital->id,
+            'professional_id' => $request->doctor,
+            'reason' => $request->reason,
+            'status' => 'Pending',
             'date' => $request->appointment_date,
         ]);
 
@@ -45,19 +46,32 @@ class ScheduleController extends Controller
 
     // Delete Appointments.
     public function deleteAppointments($schedule_id) {
-        
+
         $schedule = Schedule::find($schedule_id);
 
         if ($schedule) {
             $schedule->delete();
         }
 
-        $temp = Schedule::where('hospital_id', $schedule->hospital_id)->first();
+        return redirect()->back();
+    }
 
-        if (!$temp) {
-            $hospital = Hospital::find($schedule->hospital_id);
-            $hospital->delete();
-        }
+    // Professional can accept appointments.
+    public function acceptAppointments($schedule_id) {
+        $schedule = Schedule::find($schedule_id);
+
+        $schedule->status = 'Accepted';
+        $schedule->save();
+
+        return redirect()->back();
+    }
+
+    // Professional can deny appointments.
+    public function denyAppointments($schedule_id) {
+        $schedule = Schedule::find($schedule_id);
+
+        $schedule->status = 'Denied';
+        $schedule->save();
 
         return redirect()->back();
     }

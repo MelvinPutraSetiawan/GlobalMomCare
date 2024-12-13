@@ -148,6 +148,7 @@ class ProductController extends Controller
     }
 
     public function addCart(Request $request, $id){
+        if(Auth::user()->role == "admin") return redirect()->route('products.index');
         Cart::firstOrCreate([
             'product_id' => $id,
             'account_id' => Auth::id(),

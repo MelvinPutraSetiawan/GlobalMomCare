@@ -4,6 +4,21 @@
 
 @section('content')
 <div class="container mx-auto p-6">
+    <div>
+      <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+        <div class="mx-auto grid max-w-screen-xl px-4 pb-8 md:grid-cols-12 lg:gap-12 lg:pb-16 xl:gap-0">
+          <div class="content-center justify-self-start items-center md:col-span-7 md:text-start">
+            <h1 class="mt-20 mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-white md:max-w-2xl md:text-5xl xl:text-6xl">Expert Care:<br />Guide to Motherhood and Beyond!</h1>
+            <p class="mb-4 max-w-2xl text-gray-500 dark:text-gray-400 md:mb-12 md:text-lg mb-3 lg:mb-5 lg:text-xl">Start Reading – Expert Tips Await!</p>
+            <a href="#" class="inline-block rounded-lg bg-primary-700 px-6 py-3.5 text-center font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Shop Now</a>
+          </div>
+          <div class="hidden md:col-span-5 md:mt-0 md:flex">
+            <img class="dark:hidden" src="{{ asset('images/auth/home.jpg')}}" alt="shopping illustration" />
+          </div>
+        </div>
+      </section>
+    </div>
+
     <div class="flex flex-row justify-between items-start mb-6 relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg w-full p-4">
         <form method="GET" action="{{ route('articles.index') }}" class="w-full flex flex-col justify-start items-start gap-4 lg:justify-between lg:flex-row">
             <div class="w-full flex justify-start items-center">

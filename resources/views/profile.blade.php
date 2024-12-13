@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="container">
-        <h1 class="font-extrabold text-4xl mt-9 mb-0">{{ $user->name }}</h1>
-        <p class="mb-0">{{ $user->email }}</p>
-        @if ($user->description != null)
-            <p>{{ $user->description }}</p>
-        @else
-            <p>No description</p>
-        @endif
+        <div class="mt-10 bg-red-500 text-white p-6 rounded-lg shadow-md flex items-center gap-4 mb-6">
+            <div>
+                <h1 class="font-extrabold text-4xl mb-1">{{ $user->name }}</h1>
+                <p class="text-sm">{{ $user->email }}</p>
+                <p class="mt-2">{{ $user->description ?? 'No description available.' }}</p>
+            </div>
+        </div>
 
         {{-- Button Group --}}
         <div class="btn-group mb-4 flex" role="group" aria-label="Profile Toggle Button Group">

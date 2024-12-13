@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // Routing Pregnancy Calendars.
 
-Route::get('/pregnancy-calendar', function() { 
-    return view('pregnancy-calendar'); 
+Route::get('/pregnancy-calendar', function() {
+    return view('pregnancy-calendar');
 })->name('pregnancy.calendar');
 
 Route::post('/pregnancy-calendar', [PregnancyController::class, 'calculatePregnancy'])->name('pregnancy.calculate');
@@ -175,6 +175,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/appointments', [ScheduleController::class, 'addAppointments'])->name('add.appointments');
     Route::delete('/appointments/{id}', [ScheduleController::class, 'deleteAppointments'])->name('delete.appointments');
 
+    Route::post('/appointments/accept/{id}', [ScheduleController::class, 'acceptAppointments'])->name('accept.appointments');
+    Route::post('/appointments/deny/{id}', [ScheduleController::class, 'denyAppointments'])->name('deny.appointments');
 });
 
 
