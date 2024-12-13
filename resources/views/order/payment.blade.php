@@ -152,7 +152,7 @@
             }
         }
         $tax = 0.1 * $subtotal;
-        $total = $subtotal+$delivery;
+        $total = $subtotal+$delivery+$tax;
     @endphp
 
       <div class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
