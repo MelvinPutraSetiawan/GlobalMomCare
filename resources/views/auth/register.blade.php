@@ -11,7 +11,7 @@
 <body class="relative bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('/images/auth/bg.jpg');">
     <div class="absolute inset-0 bg-white opacity-40"></div>
 
-    <div class="glass bg-white/30 rounded-lg shadow-lg flex max-w-4xl w-full overflow-hidden relative z-10">
+    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);" class="glass bg-white/30 rounded-lg shadow-lg flex max-w-4xl w-full overflow-hidden relative z-10">
         <div class="hidden md:flex flex-1 items-center justify-center relative">
             <div class="absolute inset-0 opacity-60" style="background-color: #d5e6ed;"></div>
             <img src="{{ asset('images/auth/login.png') }}" alt="Illustration" class="relative w-4/4 h-auto z-10">
