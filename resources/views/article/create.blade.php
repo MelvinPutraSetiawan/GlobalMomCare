@@ -35,13 +35,14 @@
                                 <label for="category{{ $category->id }}" class="ml-2 text-gray-700">{{ $category->name }}</label>
                             </div>
                         @endforeach
+                    </div>
+                    <br>
                     @error('categories')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                     @error('categories.*')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
-                    </div>
                 </div>
             </div>
 
