@@ -21,6 +21,9 @@
                     <label for="images" class="block text-lg font-medium text-gray-700 mb-2">Upload Images</label>
                     <input type="file" id="imageInput" name="images[]" multiple class="w-full p-3 border rounded-lg shadow-sm" accept="image/*">
                     <div id="previewContainer" class="flex flex-wrap gap-4 pt-3"></div>
+                    @error('images.*')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div>
@@ -32,6 +35,12 @@
                                 <label for="category{{ $category->id }}" class="ml-2 text-gray-700">{{ $category->name }}</label>
                             </div>
                         @endforeach
+                    @error('categories')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                    @error('categories.*')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                     </div>
                 </div>
             </div>
@@ -40,11 +49,17 @@
                 <div class="mb-6">
                     <label for="title" class="block text-lg font-medium text-gray-700 mb-2">Title</label>
                     <input type="text" name="title" id="title" class="w-full p-3 border rounded-lg shadow-sm" placeholder="Enter the article title" required>
+                    @error('title')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="pt-4 h-auto">
                     <label for="content" class="block text-lg font-medium text-gray-700 mb-2">Content</label>
                     <textarea name="content" id="content" rows="8" class="w-full p-3 border rounded-lg shadow-sm" placeholder="Write your article here..." required></textarea>
+                    @error('content')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
