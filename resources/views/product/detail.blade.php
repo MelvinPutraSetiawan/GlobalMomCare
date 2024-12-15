@@ -62,7 +62,7 @@
             <!-- Options -->
             <div class="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 class="sr-only">Product information</h2>
-                <p class="text-3xl tracking-tight text-gray-900">Rp. {{ $product->price }}</p>
+                <p class="text-3xl tracking-tight text-gray-900">Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
                 <p class="text-base font-bold tracking-tight text-gray-900">Available Stock: {{ $product->stock }}</p>
 
                 @if (auth()->check() && auth()->user()->role != "admin")
