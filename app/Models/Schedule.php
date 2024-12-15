@@ -10,15 +10,15 @@ class Schedule extends Model
     /** @use HasFactory<\Database\Factories\ScheduleFactory> */
     use HasFactory;
 
-    protected $fillable = ['account_id', 'hospital_id', 'date'];
+    protected $fillable = ['account_id', 'professional_id', 'reason', 'status', 'date'];
 
     public function account()
     {
         return $this->belongsTo(Account::class);
     }
 
-    public function hospital()
+    public function professional()
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->belongsTo(Account::class, 'professional_id', 'id');
     }
 }
