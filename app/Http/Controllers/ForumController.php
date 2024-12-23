@@ -113,7 +113,7 @@ class ForumController extends Controller
 
         $forum->categories()->sync($request->categories);
 
-        // Handle new images if provided
+        // If have new images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $imageData = file_get_contents($image->getRealPath());

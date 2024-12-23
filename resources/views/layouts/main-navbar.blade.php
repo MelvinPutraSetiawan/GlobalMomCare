@@ -50,7 +50,7 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold mr-3" href="#">About Us</a>
+                    <a class="nav-link text-dark fw-semibold mr-3" href="{{route('about.us')}}">About Us</a>
                 </li>
                 <!-- Check if user logged? -->
                 @if (Auth::check())

@@ -49,6 +49,14 @@ Route::get('/forums/search', [ForumController::class, 'search'])->name('forums.s
 Route::get('/forums/detail/{id}', [ForumController::class, 'show'])->name('forums.show');
 
 // ==================
+// ABOUT US ROUTING
+// ==================
+// Routing About Us
+Route::get('/about-us', function () {
+    return view('about');
+})->name('about.us');
+
+// ==================
 // PRODUCT ROUTING
 // ==================
 // Routing Buat ke Page ==== PRODUCT ====
